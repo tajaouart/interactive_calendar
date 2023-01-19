@@ -8,8 +8,9 @@ class HiddenDay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const DayWidget(
-      day: 0,
-      hide: true,
+      dayNumber: 0,
+      isHidden: true,
+      darkMode: false,
     );
   }
 }

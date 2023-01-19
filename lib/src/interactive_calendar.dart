@@ -12,6 +12,7 @@ class InteractiveCalendar extends StatelessWidget {
     this.textHighLightColor = Colors.white,
     this.onPreviousYear,
     this.onNextYear,
+    this.darkMode = false,
     Key? key,
   }) : super(key: key);
 
@@ -22,6 +23,7 @@ class InteractiveCalendar extends StatelessWidget {
   final Function()? onPreviousYear;
   final Function()? onNextYear;
   final List<DateTime> highlightedDays;
+  final bool darkMode;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +36,9 @@ class InteractiveCalendar extends StatelessWidget {
               onPressed: onPreviousYear,
               icon: Icon(
                 Icons.chevron_left,
-                color: onPreviousYear != null ? Colors.white : Colors.grey,
+                color: onPreviousYear != null
+                    ? (darkMode ? Colors.white : Colors.black)
+                    : Colors.grey,
                 size: 32,
               ),
             ),
@@ -43,8 +47,8 @@ class InteractiveCalendar extends StatelessWidget {
             ),
             Text(
               currentYear.toString() ?? '----',
-              style: const TextStyle(
-                color: Colors.white,
+              style: TextStyle(
+                color: darkMode ? Colors.white : Colors.black,
                 fontSize: 20,
               ),
             ),
@@ -55,7 +59,9 @@ class InteractiveCalendar extends StatelessWidget {
               onPressed: onNextYear,
               icon: Icon(
                 Icons.chevron_right,
-                color: onNextYear != null ? Colors.white : Colors.grey,
+                color: onNextYear != null
+                    ? (darkMode ? Colors.white : Colors.black)
+                    : Colors.grey,
                 size: 32,
               ),
             )
@@ -78,6 +84,7 @@ class InteractiveCalendar extends StatelessWidget {
                     right: 8.0,
                   ),
                   child: MonthWidget(
+                    darkMode: darkMode,
                     month: index + 1,
                     year: currentYear,
                     highlightedDays: highlightedDays,

@@ -14,12 +14,14 @@ class MonthWidget extends StatelessWidget {
     required this.highLightColor,
     required this.textHighLightColor,
     Key? key,
+    required this.darkMode,
   }) : super(key: key);
 
   final List<DateTime> highlightedDays;
   final Function(DateTime)? onDayTap;
   final int month;
   final int year;
+  final bool darkMode;
   final Color highLightColor;
   final Color textHighLightColor;
 
@@ -38,14 +40,17 @@ class MonthWidget extends StatelessWidget {
         SizedBox(
           child: Text(
             indexToMonthName(month),
-            style: const TextStyle(color: Colors.white),
+            style:  TextStyle(color: (darkMode ? Colors.white : Colors.black)),
           ),
         ),
         Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(8)),
-            border: Border.all(color: Colors.white12, width: 2),
+            border: Border.all(
+              color: (darkMode ? Colors.white12 : Colors.black12),
+              width: 2,
+            ),
           ),
           child: Wrap(
             children: [
@@ -63,11 +68,12 @@ class MonthWidget extends StatelessWidget {
                     },
                   );
                   return DayWidget(
-                    dayTime: highlightedDay,
-                    onDayTap: onDayTap,
-                    day: index + 1,
-                    highLightColor: highLightColor,
-                    textHighLightColor: textHighLightColor,
+                    date: highlightedDay,
+                    darkMode: darkMode,
+                    onTap: onDayTap,
+                    dayNumber: index + 1,
+                    highlightColor: highLightColor,
+                    textHighlightColor: textHighLightColor,
                   );
                 },
               )
