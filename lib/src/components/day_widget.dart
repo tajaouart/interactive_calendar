@@ -4,14 +4,16 @@ import 'package:flutter/material.dart';
 /// It also supports tap events and hiding functionality.
 class DayWidget extends StatelessWidget {
   const DayWidget({
+    this.textHighlightColor = Colors.white,
+    this.highlightColor = Colors.green,
+    required this.isHighlightedDay,
+    this.onHighlightedDayTap,
     required this.dayNumber,
+    required this.darkMode,
+    this.isHidden = false,
+    this.onOtherDayTap,
     Key? key,
     this.date,
-    this.isHidden = false,
-    this.onTap,
-    required this.darkMode,
-    this.highlightColor = Colors.green,
-    this.textHighlightColor = Colors.white,
   }) : super(key: key);
 
   /// The number of the day to display
@@ -19,6 +21,8 @@ class DayWidget extends StatelessWidget {
 
   /// The date associated with this day
   final DateTime? date;
+
+  final bool isHighlightedDay;
 
   /// Whether or not the widget is hidden
   final bool isHidden;
@@ -32,7 +36,9 @@ class DayWidget extends StatelessWidget {
   final bool darkMode;
 
   /// The callback to be called when the user taps the widget
-  final void Function(DateTime)? onTap;
+  final void Function(DateTime)? onHighlightedDayTap;
+
+  final void Function(DateTime)? onOtherDayTap;
 
   @override
   Widget build(BuildContext context) {
@@ -40,11 +46,7 @@ class DayWidget extends StatelessWidget {
     return Opacity(
       opacity: isHidden ? 0 : 1,
       child: InkWell(
-        onTap: (isHidden || onTap == null || date == null)
-            ? null
-            : () {
-                onTap?.call(date!);
-              },
+        onTap: onTap(),
         child: SizedBox(
           width: width / 7,
           height: width / 7,
@@ -52,7 +54,7 @@ class DayWidget extends StatelessWidget {
             padding: const EdgeInsets.all(4.0),
             child: Container(
               decoration: BoxDecoration(
-                color: date == null ? null : highlightColor,
+                color: isHighlightedDay ? highlightColor : null,
                 borderRadius: const BorderRadius.all(Radius.circular(4)),
               ),
               child: Center(
@@ -60,7 +62,7 @@ class DayWidget extends StatelessWidget {
                   dayNumber.toString(),
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: date == null ? Colors.grey : textHighlightColor,
+                    color: isHighlightedDay ? textHighlightColor : Colors.grey,
                   ),
                 ),
               ),
@@ -69,5 +71,24 @@ class DayWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Function()? onTap() {
+    if (isHidden || date == null) {
+      return null;
+    } else {
+      if (onHighlightedDayTap != null && isHighlightedDay) {
+        return () {
+          onHighlightedDayTap?.call(date!);
+        };
+      } else {
+        if (onOtherDayTap != null) {
+          return () {
+            onOtherDayTap?.call(date!);
+          };
+        }
+      }
+    }
+    return null;
   }
 }

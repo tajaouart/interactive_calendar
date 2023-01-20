@@ -12,17 +12,19 @@ class MonthWidget extends StatelessWidget {
     required this.highlightedDays,
     required this.highLightColor,
     required this.displayMode,
+    this.onHighlightedDayTap,
     required this.darkMode,
     this.onPreviousMonth,
     required this.month,
     required this.year,
     this.onNextMonth,
-    this.onDayTap,
+    this.onOtherDayTap,
     Key? key,
   }) : super(key: key);
 
+  final Function(DateTime)? onHighlightedDayTap;
+  final Function(DateTime)? onOtherDayTap;
   final List<DateTime> highlightedDays;
-  final Function(DateTime)? onDayTap;
   final Function()? onPreviousMonth;
   final Color textHighLightColor;
   final Function()? onNextMonth;
@@ -68,7 +70,7 @@ class MonthWidget extends StatelessWidget {
               ...List.generate(
                 days,
                 (index) {
-                  final highlightedDay = highlightedDays.firstWhereOrNull(
+                  final date = highlightedDays.firstWhereOrNull(
                     (element) {
                       return element.isSameDayAs(
                         DateTime(year, month, index + 1),
@@ -76,12 +78,14 @@ class MonthWidget extends StatelessWidget {
                     },
                   );
                   return DayWidget(
-                    date: highlightedDay,
-                    darkMode: darkMode,
-                    onTap: onDayTap,
-                    dayNumber: index + 1,
-                    highlightColor: highLightColor,
+                    onHighlightedDayTap: onHighlightedDayTap,
+                    date: DateTime(year, month, index + 1),
                     textHighlightColor: textHighLightColor,
+                    isHighlightedDay: date != null,
+                    highlightColor: highLightColor,
+                    onOtherDayTap: onOtherDayTap,
+                    darkMode: darkMode,
+                    dayNumber: index + 1,
                   );
                 },
               )

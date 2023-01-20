@@ -13,6 +13,7 @@ dependencies:
     sdk: flutter
   interactive_calendar:
     path: ../
+  intl:
 
 
   cupertino_icons: ^1.0.2

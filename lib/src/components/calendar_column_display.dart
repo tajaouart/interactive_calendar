@@ -10,12 +10,14 @@ class CalendarColumnDisplay extends StatelessWidget {
     this.highLightColor = Colors.green,
     required this.currentDate,
     this.darkMode = false,
-    this.onDayTap,
+    this.onHighlightedDayTap,
+    this.onOtherDayTap,
     Key? key,
   }) : super(key: key);
 
   final List<DateTime> highlightedDays;
-  final Function(DateTime)? onDayTap;
+  final Function(DateTime)? onHighlightedDayTap;
+  final Function(DateTime)? onOtherDayTap;
   final Color textHighLightColor;
   final DateTime currentDate;
   final Color highLightColor;
@@ -41,7 +43,8 @@ class CalendarColumnDisplay extends StatelessWidget {
                 highLightColor: highLightColor,
                 year: currentDate.year,
                 darkMode: darkMode,
-                onDayTap: onDayTap,
+                onHighlightedDayTap: onHighlightedDayTap,
+                onOtherDayTap: onOtherDayTap,
                 month: index + 1,
                 displayMode: DisplayMode.column,
               ),

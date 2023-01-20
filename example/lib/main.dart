@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:interactive_calendar/interactive_calendar.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   runApp(const MyApp());
@@ -69,22 +70,24 @@ class _MyHomePageState extends State<MyHomePage> {
         body: TabBarView(
           children: [
             InteractiveCalendar(
-              darkMode: darkMode,
-              currentDate: currentDate,
               displayMode: DisplayMode.singleMonth,
-              onNextYear: nextYear(),
               onPreviousYear: previousYear(),
+              onHighlightedDayTap: onDayTap,
+              currentDate: currentDate,
+              onNextYear: nextYear(),
+              darkMode: darkMode,
               highlightedDays: [
                 DateTime(2023, 1, 1),
                 DateTime(2023, 2, 2),
               ],
             ),
             InteractiveCalendar(
-              darkMode: darkMode,
-              currentDate: currentDate,
               displayMode: DisplayMode.column,
-              onNextYear: nextYear(),
               onPreviousYear: previousYear(),
+              onHighlightedDayTap: onDayTap,
+              currentDate: currentDate,
+              onNextYear: nextYear(),
+              darkMode: darkMode,
               highlightedDays: [
                 DateTime(2023, 1, 1),
                 DateTime(2023, 2, 2),
@@ -114,6 +117,26 @@ class _MyHomePageState extends State<MyHomePage> {
             });
           }
         : null;
+  }
+
+  void onDayTap(dateTime) {
+    showDialog<String>(
+      context: context,
+      builder: (BuildContext context) {
+        final date = DateFormat.yMMMMd().format(dateTime);
+
+        return AlertDialog(
+          title: const Text('On Tap'),
+          content: Text(date),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'OK'),
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
   }
 }
 

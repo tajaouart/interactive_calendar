@@ -9,7 +9,8 @@ class InteractiveCalendar extends StatefulWidget {
   const InteractiveCalendar({
     required this.currentDate,
     this.highlightedDays = const <DateTime>[],
-    this.onDayTap,
+    this.onHighlightedDayTap,
+    this.onOtherDayTap,
     this.highLightColor = Colors.green,
     this.textHighLightColor = Colors.white,
     this.onPreviousYear,
@@ -25,7 +26,8 @@ class InteractiveCalendar extends StatefulWidget {
   final DisplayMode displayMode;
   final Color highLightColor;
   final Color textHighLightColor;
-  final Function(DateTime)? onDayTap;
+  final Function(DateTime)? onHighlightedDayTap;
+  final Function(DateTime)? onOtherDayTap;
   final Function()? onPreviousYear;
   final Function()? onPreviousMonth;
   final Function()? onNextYear;
@@ -83,7 +85,8 @@ class _InteractiveCalendarState extends State<InteractiveCalendar> {
             ? CalendarColumnDisplay(
                 currentDate: widget.currentDate,
                 highlightedDays: widget.highlightedDays,
-                onDayTap: widget.onDayTap,
+                onHighlightedDayTap: widget.onHighlightedDayTap,
+                onOtherDayTap: widget.onOtherDayTap,
                 highLightColor: widget.highLightColor,
                 textHighLightColor: widget.textHighLightColor,
                 darkMode: widget.darkMode,
@@ -93,7 +96,8 @@ class _InteractiveCalendarState extends State<InteractiveCalendar> {
                   currentMonth: currentMonth,
                   currentYear: widget.currentDate.year,
                   highlightedDays: widget.highlightedDays,
-                  onDayTap: widget.onDayTap,
+                  onHighlightedDayTap: widget.onHighlightedDayTap,
+                  onOtherDayTap: widget.onOtherDayTap,
                   highLightColor: widget.highLightColor,
                   textHighLightColor: widget.textHighLightColor,
                   darkMode: widget.darkMode,

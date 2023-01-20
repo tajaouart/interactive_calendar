@@ -11,6 +11,7 @@ class HiddenDay extends StatelessWidget {
       dayNumber: 0,
       isHidden: true,
       darkMode: false,
+      isHighlightedDay: false,
     );
   }
 }

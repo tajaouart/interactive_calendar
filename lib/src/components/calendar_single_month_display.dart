@@ -7,7 +7,8 @@ class CalendarSingleMonthDisplay extends StatelessWidget {
   const CalendarSingleMonthDisplay({
     required this.currentYear,
     this.highlightedDays = const <DateTime>[],
-    this.onDayTap,
+    this.onHighlightedDayTap,
+    this.onOtherDayTap,
     this.highLightColor = Colors.green,
     this.textHighLightColor = Colors.white,
     this.onNextMonth,
@@ -22,7 +23,8 @@ class CalendarSingleMonthDisplay extends StatelessWidget {
   final Color textHighLightColor;
   final Function()? onNextMonth;
   final Function()? onPreviousMonth;
-  final Function(DateTime)? onDayTap;
+  final Function(DateTime)? onHighlightedDayTap;
+  final Function(DateTime)? onOtherDayTap;
   final List<DateTime> highlightedDays;
   final bool darkMode;
   final int currentMonth;
@@ -49,7 +51,8 @@ class CalendarSingleMonthDisplay extends StatelessWidget {
             month: currentMonth,
             darkMode: darkMode,
             year: currentYear,
-            onDayTap: onDayTap,
+            onHighlightedDayTap: onHighlightedDayTap,
+            onOtherDayTap: onOtherDayTap,
           ),
         );
       }),
