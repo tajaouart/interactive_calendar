@@ -6,18 +6,40 @@ import 'package:interactive_calendar/src/utils/extensions.dart';
 import 'day_widget.dart';
 import 'hidden_day.dart';
 
+/// A widget that displays a month
 class MonthWidget extends StatelessWidget {
   const MonthWidget({
+    /// The color to use for the text when the widget is highlighted
     required this.textHighLightColor,
+
+    /// The days that will be highlighted
     required this.highlightedDays,
+
+    /// The color to use to highlight the widget
     required this.highLightColor,
+
+    /// The display mode of the widget
     required this.displayMode,
+
+    /// The callback to be called when the user taps a highlighted day
     this.onHighlightedDayTap,
+
+    /// Whether the app is in dark mode or not
     required this.darkMode,
+
+    /// The callback to be called when the user taps the left arrow button
     this.onPreviousMonth,
+
+    /// The month to display
     required this.month,
+
+    /// The year of the month to display
     required this.year,
+
+    /// The callback to be called when the user taps the right arrow button
     this.onNextMonth,
+
+    /// The callback to be called when the user taps a non-highlighted day
     this.onOtherDayTap,
     Key? key,
   }) : super(key: key);
@@ -64,9 +86,11 @@ class MonthWidget extends StatelessWidget {
           ),
           child: Wrap(
             children: [
+              // Create empty widgets for days before the first of the month
               ...List.generate(weekday > 0 ? weekday - 1 : weekday, (index) {
                 return const HiddenDay();
               }),
+              // Create day widgets for each day of the month
               ...List.generate(
                 days,
                 (index) {

@@ -4,15 +4,32 @@ import 'package:flutter/material.dart';
 /// It also supports tap events and hiding functionality.
 class DayWidget extends StatelessWidget {
   const DayWidget({
+    /// The color to use for the text when the widget is highlighted
     this.textHighlightColor = Colors.white,
+
+    /// The color to use to highlight the widget
     this.highlightColor = Colors.green,
+
+    ///  whether the day is highlighted or not
     required this.isHighlightedDay,
+
+    /// Callback when highlighted day is tapped
     this.onHighlightedDayTap,
+
+    /// number of the day to display
     required this.dayNumber,
+
+    /// whether the app is in dark mode or not
     required this.darkMode,
+
+    /// whether the widget is hidden or not
     this.isHidden = false,
+
+    /// callback when other day is tapped
     this.onOtherDayTap,
     Key? key,
+
+    /// the date associated with this day
     this.date,
   }) : super(key: key);
 
@@ -33,6 +50,7 @@ class DayWidget extends StatelessWidget {
   /// The color to use for the text when the widget is highlighted
   final Color textHighlightColor;
 
+  /// whether the app is in dark mode or not
   final bool darkMode;
 
   /// The callback to be called when the user taps the widget

@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+/// A widget that displays the weekdays of a month
 class WeekDaysWidget extends StatelessWidget {
-  const WeekDaysWidget({Key? key, required this.darkMode}) : super(key: key);
+  const WeekDaysWidget({
+    Key? key,
+
+    /// whether the app is in dark mode or not
+    required this.darkMode,
+  }) : super(key: key);
 
   final bool darkMode;
 
   @override
   Widget build(BuildContext context) {
-    final style = TextStyle(color: darkMode? Colors.white : Colors.black);
-    List<String> shortDayNames = [];
+    final style = TextStyle(color: darkMode ? Colors.white : Colors.black);
+    final List<String> shortDayNames = [];
 
     // Start with Monday
     var date = DateTime(2022, 10, 3);

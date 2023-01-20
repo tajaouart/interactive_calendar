@@ -15,12 +15,25 @@ class CalendarColumnDisplay extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  /// The selected days that should be highlighted
   final List<DateTime> highlightedDays;
+
+  /// Callback function to be called when a highlighted day is tapped
   final Function(DateTime)? onHighlightedDayTap;
+
+  /// Callback function to be called when a day that is not highlighted is tapped
   final Function(DateTime)? onOtherDayTap;
+
+  /// The text color to use for highlighted days
   final Color textHighLightColor;
+
+  /// The current date to be displayed
   final DateTime currentDate;
+
+  /// The background color to use for highlighted days
   final Color highLightColor;
+
+  /// Whether the calendar is in dark mode or not
   final bool darkMode;
 
   @override

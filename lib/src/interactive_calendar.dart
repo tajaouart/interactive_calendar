@@ -22,16 +22,37 @@ class InteractiveCalendar extends StatefulWidget {
     Key? key,
   }) : super(key: key);
 
+  /// The current date to be displayed
   final DateTime currentDate;
+
+  /// The display mode of the widget
   final DisplayMode displayMode;
+
+  /// The color to use for highlighting days.
   final Color highLightColor;
+
+  /// The text color to use for highlighted days
   final Color textHighLightColor;
+
+  /// Callback when highlighted day is tapped
   final Function(DateTime)? onHighlightedDayTap;
+
+  /// callback when other day is tapped
   final Function(DateTime)? onOtherDayTap;
+
+  /// Callback function for when the previous year button is tapped
   final Function()? onPreviousYear;
+
+  /// The callback to be called when the user taps the left arrow button
   final Function()? onPreviousMonth;
+
+  /// Callback function for when the next year button is tapped
   final Function()? onNextYear;
+
+  /// Callback when the next month button is pressed.
   final Function()? onNextMonth;
+
+  /// A list of dates to highlight on the calendar.
   final List<DateTime> highlightedDays;
   final bool darkMode;
 

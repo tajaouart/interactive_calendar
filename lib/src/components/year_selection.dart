@@ -9,9 +9,16 @@ class YearSelection extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  /// The current year being displayed
   final int year;
+
+  /// Whether or not the app is in dark mode
   final bool darkMode;
+
+  /// Callback function for when the previous year button is tapped
   final Function()? onPreviousYear;
+
+  /// Callback function for when the next year button is tapped
   final Function()? onNextYear;
 
   @override
@@ -20,6 +27,7 @@ class YearSelection extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
+        // Icon button for previous year
         IconButton(
           onPressed: onPreviousYear,
           icon: Icon(
@@ -30,9 +38,11 @@ class YearSelection extends StatelessWidget {
             size: 32,
           ),
         ),
+        // Spacer between the icons and text
         const SizedBox(
           width: 8,
         ),
+        // Text widget to show the current year
         Text(
           currentYearStr,
           style: TextStyle(
@@ -40,9 +50,11 @@ class YearSelection extends StatelessWidget {
             fontSize: 20,
           ),
         ),
+        // Spacer between the text and the next year icon
         const SizedBox(
           width: 8,
         ),
+        // Icon button for next year
         IconButton(
           onPressed: onNextYear,
           icon: Icon(

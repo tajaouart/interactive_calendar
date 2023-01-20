@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
-
 import '../utils/extensions.dart';
 
+/// A widget that displays a month selection with left and right arrows
+/// to navigate to the previous and next months respectively.
 class MonthSelection extends StatelessWidget {
   const MonthSelection({
+    /// whether the app is in dark mode or not
     required this.darkMode,
+
+    /// the current month index
     required this.currentMonth,
+
+    /// callback when previous month button is pressed
     required this.onPreviousMonth,
+
+    /// callback when next month button is pressed
     required this.onNextMonth,
     Key? key,
   }) : super(key: key);
