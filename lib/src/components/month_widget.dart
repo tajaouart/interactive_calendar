@@ -58,7 +58,7 @@ class MonthWidget extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(8)),
             border: Border.all(
-              color: (darkMode ? Colors.white12 : Colors.black12),
+              color: (darkMode ? Colors.white24 : Colors.black26),
               width: 2,
             ),
           ),

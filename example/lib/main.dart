@@ -3,23 +3,13 @@ import 'package:interactive_calendar/interactive_calendar.dart';
 import 'package:intl/intl.dart';
 
 void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Interactive Calendar Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+  runApp(
+    const MaterialApp(
+      home: MyHomePage(
+        title: 'Interactive Calendar Demo',
       ),
-      home: const MyHomePage(title: 'Interactive Calendar Demo'),
-    );
-  }
+    ),
+  );
 }
 
 class MyHomePage extends StatefulWidget {
@@ -73,6 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
               displayMode: DisplayMode.singleMonth,
               onPreviousYear: previousYear(),
               onHighlightedDayTap: onDayTap,
+              onOtherDayTap: onDayTap,
               currentDate: currentDate,
               onNextYear: nextYear(),
               darkMode: darkMode,

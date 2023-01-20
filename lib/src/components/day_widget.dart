@@ -62,7 +62,13 @@ class DayWidget extends StatelessWidget {
                   dayNumber.toString(),
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: isHighlightedDay ? textHighlightColor : Colors.grey,
+                    color: isHighlightedDay
+                        ? textHighlightColor
+                        : onOtherDayTap == null
+                            ? Colors.grey
+                            : darkMode
+                                ? Colors.white
+                                : Colors.black,
                   ),
                 ),
               ),
