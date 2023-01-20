@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 void main() {
   runApp(
     const MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: MyHomePage(
         title: 'Interactive Calendar Demo',
       ),
@@ -25,6 +26,13 @@ class _MyHomePageState extends State<MyHomePage> {
   bool darkMode = false;
   final controller = PageController();
   var currentDate = DateTime.now();
+  final highlightedDays = [
+    DateTime(2023, 1, 1),
+    DateTime(2023, 1, 7),
+    DateTime(2023, 1, 15),
+    DateTime(2023, 1, 18),
+    DateTime(2023, 2, 2),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -67,10 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
               currentDate: currentDate,
               onNextYear: nextYear(),
               darkMode: darkMode,
-              highlightedDays: [
-                DateTime(2023, 1, 1),
-                DateTime(2023, 2, 2),
-              ],
+              highlightedDays: highlightedDays,
             ),
             InteractiveCalendar(
               displayMode: DisplayMode.column,
@@ -79,10 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
               currentDate: currentDate,
               onNextYear: nextYear(),
               darkMode: darkMode,
-              highlightedDays: [
-                DateTime(2023, 1, 1),
-                DateTime(2023, 2, 2),
-              ],
+              highlightedDays: highlightedDays,
             ),
           ],
         ),
