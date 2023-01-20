@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:interactive_calendar/src/interactive_calendar.dart';
 import 'package:interactive_calendar/src/utils/extensions.dart';
 
 import 'day_widget.dart';
@@ -7,23 +8,29 @@ import 'hidden_day.dart';
 
 class MonthWidget extends StatelessWidget {
   const MonthWidget({
+    required this.textHighLightColor,
     required this.highlightedDays,
+    required this.highLightColor,
+    required this.displayMode,
+    required this.darkMode,
+    this.onPreviousMonth,
     required this.month,
     required this.year,
+    this.onNextMonth,
     this.onDayTap,
-    required this.highLightColor,
-    required this.textHighLightColor,
     Key? key,
-    required this.darkMode,
   }) : super(key: key);
 
   final List<DateTime> highlightedDays;
   final Function(DateTime)? onDayTap;
+  final Function()? onPreviousMonth;
+  final Color textHighLightColor;
+  final Function()? onNextMonth;
+  final DisplayMode displayMode;
+  final Color highLightColor;
+  final bool darkMode;
   final int month;
   final int year;
-  final bool darkMode;
-  final Color highLightColor;
-  final Color textHighLightColor;
 
   @override
   Widget build(BuildContext context) {
@@ -37,12 +44,13 @@ class MonthWidget extends StatelessWidget {
 
     return Column(
       children: [
-        SizedBox(
-          child: Text(
-            indexToMonthName(month),
-            style:  TextStyle(color: (darkMode ? Colors.white : Colors.black)),
+        if (displayMode == DisplayMode.column)
+          SizedBox(
+            child: Text(
+              indexToMonthName(month),
+              style: TextStyle(color: (darkMode ? Colors.white : Colors.black)),
+            ),
           ),
-        ),
         Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(

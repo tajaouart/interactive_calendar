@@ -1,103 +1,110 @@
 import 'package:flutter/material.dart';
+import 'components/calendar_column_display.dart';
+import 'components/month_selection.dart';
+import 'components/calendar_single_month_display.dart';
+import 'components/week_days_widget.dart';
+import 'components/year_selection.dart';
 
-import 'month_widget.dart';
-import 'week_days_widget.dart';
-
-class InteractiveCalendar extends StatelessWidget {
+class InteractiveCalendar extends StatefulWidget {
   const InteractiveCalendar({
-    required this.currentYear,
+    required this.currentDate,
     this.highlightedDays = const <DateTime>[],
     this.onDayTap,
     this.highLightColor = Colors.green,
     this.textHighLightColor = Colors.white,
     this.onPreviousYear,
+    this.onPreviousMonth,
+    this.onNextMonth,
     this.onNextYear,
+    this.displayMode = DisplayMode.column,
     this.darkMode = false,
     Key? key,
   }) : super(key: key);
 
-  final int currentYear;
+  final DateTime currentDate;
+  final DisplayMode displayMode;
   final Color highLightColor;
   final Color textHighLightColor;
   final Function(DateTime)? onDayTap;
   final Function()? onPreviousYear;
+  final Function()? onPreviousMonth;
   final Function()? onNextYear;
+  final Function()? onNextMonth;
   final List<DateTime> highlightedDays;
   final bool darkMode;
+
+  @override
+  State<InteractiveCalendar> createState() => _InteractiveCalendarState();
+}
+
+class _InteractiveCalendarState extends State<InteractiveCalendar> {
+  int currentMonth = 1;
+
+  @override
+  void initState() {
+    currentMonth = widget.currentDate.month;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            IconButton(
-              onPressed: onPreviousYear,
-              icon: Icon(
-                Icons.chevron_left,
-                color: onPreviousYear != null
-                    ? (darkMode ? Colors.white : Colors.black)
-                    : Colors.grey,
-                size: 32,
-              ),
-            ),
-            const SizedBox(
-              width: 8,
-            ),
-            Text(
-              currentYear.toString() ?? '----',
-              style: TextStyle(
-                color: darkMode ? Colors.white : Colors.black,
-                fontSize: 20,
-              ),
-            ),
-            const SizedBox(
-              width: 8,
-            ),
-            IconButton(
-              onPressed: onNextYear,
-              icon: Icon(
-                Icons.chevron_right,
-                color: onNextYear != null
-                    ? (darkMode ? Colors.white : Colors.black)
-                    : Colors.grey,
-                size: 32,
-              ),
-            )
-          ],
+        YearSelection(
+          year: widget.currentDate.year,
+          darkMode: widget.darkMode,
+          onNextYear: widget.onNextYear,
+          onPreviousYear: widget.onPreviousYear,
         ),
-        const Padding(
-          padding: EdgeInsets.all(18.0),
-          child: WeekDaysWidget(),
-        ),
-        Expanded(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(12, (index) {
-                return Padding(
-                  padding: const EdgeInsets.only(
-                    top: 8.0,
-                    bottom: 24.0,
-                    left: 8.0,
-                    right: 8.0,
-                  ),
-                  child: MonthWidget(
-                    darkMode: darkMode,
-                    month: index + 1,
-                    year: currentYear,
-                    highlightedDays: highlightedDays,
-                    onDayTap: onDayTap,
-                    highLightColor: highLightColor,
-                    textHighLightColor: textHighLightColor,
-                  ),
-                );
-              }),
-            ),
+        if (widget.displayMode == DisplayMode.singleMonth)
+          MonthSelection(
+            darkMode: widget.darkMode,
+            currentMonth: currentMonth,
+            onNextMonth: () {
+              widget.onNextMonth?.call();
+              setState(() {
+                currentMonth++;
+              });
+            },
+            onPreviousMonth: () {
+              widget.onPreviousMonth?.call();
+              setState(() {
+                currentMonth--;
+              });
+            },
+          ),
+        Padding(
+          padding: const EdgeInsets.all(18.0),
+          child: WeekDaysWidget(
+            darkMode: widget.darkMode,
           ),
         ),
+        widget.displayMode == DisplayMode.column
+            ? CalendarColumnDisplay(
+                currentDate: widget.currentDate,
+                highlightedDays: widget.highlightedDays,
+                onDayTap: widget.onDayTap,
+                highLightColor: widget.highLightColor,
+                textHighLightColor: widget.textHighLightColor,
+                darkMode: widget.darkMode,
+              )
+            : Expanded(
+                child: CalendarSingleMonthDisplay(
+                  currentMonth: currentMonth,
+                  currentYear: widget.currentDate.year,
+                  highlightedDays: widget.highlightedDays,
+                  onDayTap: widget.onDayTap,
+                  highLightColor: widget.highLightColor,
+                  textHighLightColor: widget.textHighLightColor,
+                  darkMode: widget.darkMode,
+                ),
+              ),
       ],
     );
   }
+}
+
+enum DisplayMode {
+  singleMonth,
+  column,
 }
