@@ -17,7 +17,7 @@ class InteractiveCalendar extends StatefulWidget {
     this.onPreviousMonth,
     this.onNextMonth,
     this.onNextYear,
-    this.displayMode = DisplayMode.column,
+    this.displayMode = DisplayMode.singleMonth,
     this.darkMode = false,
     Key? key,
   }) : super(key: key);

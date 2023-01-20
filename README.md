@@ -13,6 +13,9 @@ An interactive calendar package for Flutter, providing various display modes and
 - Customizable text and highlight colors
 
 
+> **Important Note:**  the year corresponding to the `currentDate` value provided to the `InteractiveCalendar` widget is the year that will be displayed. If the `onNextYear` callback is provided, the user will be able to navigate to the next year. In this case, it is the developer's responsibility to update the `currentDate` value accordingly.
+
+
 ## Getting started
 To use this package, add `interactive_calendar` as a dependency in your `pubspec.yaml` file.
 

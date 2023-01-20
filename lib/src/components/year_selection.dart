@@ -29,8 +29,10 @@ class YearSelection extends StatelessWidget {
       children: [
         // Icon button for previous year
         IconButton(
+          key: const Key('PreviousYearButton'),
           onPressed: onPreviousYear,
           icon: Icon(
+            key: const Key('PreviousYearIcon'),
             Icons.chevron_left,
             color: onPreviousYear != null
                 ? (darkMode ? Colors.white : Colors.black)
@@ -56,8 +58,10 @@ class YearSelection extends StatelessWidget {
         ),
         // Icon button for next year
         IconButton(
+          key: const Key('NextYearButton'),
           onPressed: onNextYear,
           icon: Icon(
+            key: const Key('NextYearIcon'),
             Icons.chevron_right,
             color: onNextYear != null
                 ? (darkMode ? Colors.white : Colors.black)

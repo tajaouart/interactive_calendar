@@ -67,6 +67,7 @@ class MonthWidget extends StatelessWidget {
     int weekday = DateTime(year, month, 1).weekday;
 
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         if (displayMode == DisplayMode.column)
           SizedBox(
@@ -75,45 +76,47 @@ class MonthWidget extends StatelessWidget {
               style: TextStyle(color: (darkMode ? Colors.white : Colors.black)),
             ),
           ),
-        Container(
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(Radius.circular(8)),
-            border: Border.all(
-              color: (darkMode ? Colors.white24 : Colors.black26),
-              width: 2,
+        Flexible(
+          child: Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(Radius.circular(8)),
+              border: Border.all(
+                color: (darkMode ? Colors.white24 : Colors.black26),
+                width: 2,
+              ),
             ),
-          ),
-          child: Wrap(
-            children: [
-              // Create empty widgets for days before the first of the month
-              ...List.generate(weekday > 0 ? weekday - 1 : weekday, (index) {
-                return const HiddenDay();
-              }),
-              // Create day widgets for each day of the month
-              ...List.generate(
-                days,
-                (index) {
-                  final date = highlightedDays.firstWhereOrNull(
-                    (element) {
-                      return element.isSameDayAs(
-                        DateTime(year, month, index + 1),
-                      );
-                    },
-                  );
-                  return DayWidget(
-                    onHighlightedDayTap: onHighlightedDayTap,
-                    date: DateTime(year, month, index + 1),
-                    textHighlightColor: textHighLightColor,
-                    isHighlightedDay: date != null,
-                    highlightColor: highLightColor,
-                    onOtherDayTap: onOtherDayTap,
-                    darkMode: darkMode,
-                    dayNumber: index + 1,
-                  );
-                },
-              )
-            ],
+            child: Wrap(
+              children: [
+                // Create empty widgets for days before the first of the month
+                ...List.generate(weekday > 0 ? weekday - 1 : weekday, (index) {
+                  return const HiddenDay();
+                }),
+                // Create day widgets for each day of the month
+                ...List.generate(
+                  days,
+                  (index) {
+                    final date = highlightedDays.firstWhereOrNull(
+                      (element) {
+                        return element.isSameDayAs(
+                          DateTime(year, month, index + 1),
+                        );
+                      },
+                    );
+                    return DayWidget(
+                      onHighlightedDayTap: onHighlightedDayTap,
+                      date: DateTime(year, month, index + 1),
+                      textHighlightColor: textHighLightColor,
+                      isHighlightedDay: date != null,
+                      highlightColor: highLightColor,
+                      onOtherDayTap: onOtherDayTap,
+                      darkMode: darkMode,
+                      dayNumber: index + 1,
+                    );
+                  },
+                )
+              ],
+            ),
           ),
         ),
       ],

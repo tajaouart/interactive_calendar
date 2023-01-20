@@ -32,12 +32,14 @@ class MonthSelection extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         IconButton(
+          key: const Key('PreviousMonthButton'),
           onPressed: (currentMonth > 1)
               ? () {
                   onPreviousMonth.call();
                 }
               : null,
           icon: Icon(
+            key: const Key('PreviousMonthIcon'),
             Icons.chevron_left,
             color: (currentMonth > 1)
                 ? (darkMode ? Colors.white : Colors.black)
@@ -58,12 +60,14 @@ class MonthSelection extends StatelessWidget {
           width: 8,
         ),
         IconButton(
+          key: const Key('NextMonthButton'),
           onPressed: (currentMonth < 12)
               ? () {
                   onNextMonth.call();
                 }
               : null,
           icon: Icon(
+            key: const Key('NextMonthIcon'),
             Icons.chevron_right,
             color: (currentMonth < 12)
                 ? (darkMode ? Colors.white : Colors.black)

@@ -71,6 +71,7 @@ class DayWidget extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(4.0),
             child: Container(
+              key: Key('HighlightColor${date?.day}/${date?.month}'),
               decoration: BoxDecoration(
                 color: isHighlightedDay ? highlightColor : null,
                 borderRadius: const BorderRadius.all(Radius.circular(4)),
